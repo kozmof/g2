@@ -4,6 +4,7 @@
 import argparse
 import os
 
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def register():
     parser = argparse.ArgumentParser("advanced cd manipulator")
@@ -17,7 +18,10 @@ def register():
 
 
 def load_file():
-    pass
+    file_path = PROJECT_DIR + '/paths.txt'
+    with open(file_path, 'r+') as f:
+        paths = [line.rstrip() for line in f.readlines()]
+    return set(paths)
 
 
 def manipulation(args):
@@ -26,3 +30,7 @@ def manipulation(args):
 if __name__ == '__main__':
     args = register()
     manipulation(args)
+    file_paths = load_file()
+    for path in file_paths:
+        print(path)
+
