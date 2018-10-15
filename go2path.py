@@ -24,12 +24,20 @@ def load_file():
     return set(paths)
 
 
+def write_file():
+    file_path = PROJECT_DIR + '/paths.txt'
+    with open(file_path, 'a+') as f:
+        f.write(os.getcwd())
+
+
 def manipulation(args):
     pass
+
 
 if __name__ == '__main__':
     args = register()
     manipulation(args)
+    write_file()
     file_paths = load_file()
     for path in file_paths:
         print(path)
