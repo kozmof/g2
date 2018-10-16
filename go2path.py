@@ -31,14 +31,13 @@ def write_file():
 
 
 def manipulation(args):
-    pass
+    if args.list:
+        file_paths = load_file()
+        for num, path in enumerate(file_paths):
+            print(num, path)
 
 
 if __name__ == '__main__':
     args = register()
     manipulation(args)
-    write_file()
-    file_paths = load_file()
-    for path in file_paths:
-        print(path)
 
