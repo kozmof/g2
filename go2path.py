@@ -14,27 +14,47 @@ def register():
     parser.add_argument('-s', '--save', help='save a current path', action='store_true')
     parser.add_argument('-d', '--delete', help='delete a specified path', nargs=1, action='store', metavar=('num'))
     args = parser.parse_args()
+
     return args
 
 
 def load_file():
     file_path = PROJECT_DIR + '/paths.txt'
+
     with open(file_path, 'r+') as f:
-        paths = [line.rstrip() for line in f.readlines()]
-    return set(paths)
+        dir_paths = [line.rstrip() for line in f.readlines()]
+
+    return set(dir_paths)
 
 
 def write_file():
     file_path = PROJECT_DIR + '/paths.txt'
+
     with open(file_path, 'a+') as f:
         f.write(os.getcwd())
+
+    make_unique()
+
+
+def make_unique():
+    file_path = PROJECT_DIR + '/paths.txt'
+
+    with open(file_path, 'r+') as f:
+        dir_paths = set([line.rstrip() for line in f.readlines()])
+
+    with open(file_path, 'w') as f:
+        for path in dir_paths:
+            f.write(path + '\n')
 
 
 def manipulation(args):
     if args.list:
-        file_paths = load_file()
-        for num, path in enumerate(file_paths):
+        dir_paths = load_file()
+        for num, path in enumerate(dir_paths):
             print(num, path)
+
+    if args.save:
+        write_file()
 
 
 if __name__ == '__main__':
