@@ -4,6 +4,7 @@
 import argparse
 import os
 
+#Orders of saved paths are consistent with path.txt.
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 
