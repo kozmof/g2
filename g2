@@ -22,9 +22,10 @@ def load_file():
     file_path = PROJECT_DIR + '/paths.txt'
 
     with open(file_path, 'r+') as f:
-        dir_paths = [line.rstrip() for line in f.readlines()]
+        dir_paths_set = set([(num, line.rstrip()) for num, line in enumerate(f.readlines())])
+        dir_paths_list = sorted(dir_paths_set, key=lambda x:x[0])
 
-    return set(dir_paths)
+    return dir_paths_list
 
 
 def write_file():
@@ -40,18 +41,22 @@ def make_unique():
     file_path = PROJECT_DIR + '/paths.txt'
 
     with open(file_path, 'r+') as f:
-        dir_paths = set([line for line in f.readlines()]) 
+        dir_paths_set = set([(num, line) for num, line in enumerate(f.readlines())]) 
+        dir_paths_list = sorted(dir_paths_set, key=lambda x:x[0])
 
     with open(file_path, 'w') as f:
-        for path in dir_paths:
-            f.write(path)
+        wrote_list = []
+        for path in dir_paths_list:
+            if path[1] not in wrote_list:
+                f.write(path[1])
+                wrote_list.append(path[1])
 
 
 def manipulation(args):
     if args.list:
-        dir_paths = load_file()
-        for num, path in enumerate(dir_paths):
-            print(num, path)
+        dir_paths_list = load_file()
+        for path in dir_paths_list:
+            print(path[0], path[1])
 
     if args.save:
         write_file()
