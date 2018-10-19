@@ -27,34 +27,20 @@ def load_file():
     file_path = PROJECT_DIR + '/paths.txt'
 
     with open(file_path, 'r+') as f:
-        dir_paths_set = set([(num, line.rstrip()) for num, line in enumerate(f.readlines())])
-        dir_paths_list = sorted(dir_paths_set, key=lambda x:x[0])
+        paths_list = [(num, line.rstrip()) for num, line in enumerate(f.readlines())]
 
-    return dir_paths_list
+    return paths_list
 
 
 def write_file():
     file_path = PROJECT_DIR + '/paths.txt'
 
-    with open(file_path, 'a+') as f:
-        f.write(os.getcwd() + '\n')
-
-    make_unique()
-
-
-def make_unique():
-    file_path = PROJECT_DIR + '/paths.txt'
-
     with open(file_path, 'r+') as f:
-        dir_paths_set = set([(num, line) for num, line in enumerate(f.readlines())]) 
-        dir_paths_list = sorted(dir_paths_set, key=lambda x:x[0])
+        paths = [line.rstrip() for line in f.readlines()]
 
-    with open(file_path, 'w') as f:
-        wrote_list = []
-        for path in dir_paths_list:
-            if path[1] not in wrote_list:
-                f.write(path[1])
-                wrote_list.append(path[1])
+    if os.getcwd() not in paths:
+        with open(file_path, 'a+') as f:
+            f.write(os.getcwd() + '\n')
 
 
 def swap_order(num1, num2):
@@ -64,8 +50,8 @@ def swap_order(num1, num2):
 
 def manipulation(args):
     if args.list:
-        dir_paths_list = load_file()
-        for path in dir_paths_list:
+        paths_list = load_file()
+        for path in paths_list:
             print(path[0], path[1])
 
     if args.save:
