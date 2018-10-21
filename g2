@@ -17,7 +17,7 @@ def register():
     parser.add_argument('-j', '--jump', help='jump to a specified path', nargs=1, action='store', metavar=('num'))
     parser.add_argument('-s', '--save', help='save a current path', action='store_true')
     parser.add_argument('-d', '--delete', help='delete a specified path', nargs=1, action='store', metavar=('num'))
-    parser.add_argument('-c', '--change', help='change path order', nargs=2, action='store', metavar=('num', 'num'))
+    parser.add_argument('-c', '--change', help='change path order', nargs=2, action='store', metavar=('num', 'num'), type=int)
     args = parser.parse_args()
 
     return args
@@ -44,9 +44,16 @@ def write_file():
 
 
 def swap_order(num1, num2):
-    if num2 < num1:
-        num1, num2 = num2, num1
+    file_path = PROJECT_DIR + '/paths.txt'
 
+    with open(file_path, 'r+') as f:
+        paths_list = [line.rstrip() for line in f.readlines()]
+
+    paths_list[num1], paths_list[num2] = paths_list[num2], paths_list[num1] 
+
+    with open(file_path, 'w') as f:
+        for path in paths_list:
+            f.write(path + '\n')
 
 def manipulation(args):
     if args.list:
@@ -56,6 +63,9 @@ def manipulation(args):
 
     if args.save:
         write_file()
+
+    if args.change:
+        swap_order(args.change[0], args.change[1])
 
 
 if __name__ == '__main__':
