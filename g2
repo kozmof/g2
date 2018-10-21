@@ -3,6 +3,7 @@
 
 import argparse
 import os
+from os import environ
 
 #Orders of saved paths are consistent with path.txt.
 
@@ -26,8 +27,11 @@ def register():
 def load_file():
     file_path = PROJECT_DIR + '/paths.txt'
 
-    with open(file_path, 'r+') as f:
-        paths_list = [(num, line.rstrip()) for num, line in enumerate(f.readlines())]
+    try:
+        with open(file_path, 'r') as f:
+            paths_list = [(num, line.rstrip()) for num, line in enumerate(f.readlines())]
+    except IOError:
+        print("paths.txt doesn't exist.")
 
     return paths_list
 
@@ -35,8 +39,11 @@ def load_file():
 def write_file():
     file_path = PROJECT_DIR + '/paths.txt'
 
-    with open(file_path, 'r+') as f:
-        paths_list = [line.rstrip() for line in f.readlines()]
+    try:
+        with open(file_path, 'r') as f:
+            paths_list = [line.rstrip() for line in f.readlines()]
+    except IOError:
+        print("paths.txt doesn't exist.")
 
     if os.getcwd() not in paths_list:
         with open(file_path, 'a+') as f:
@@ -46,8 +53,11 @@ def write_file():
 def delete_path(num):
     file_path = PROJECT_DIR + '/paths.txt'
 
-    with open(file_path, 'r+') as f:
-        paths_list = [line.rstrip() for line in f.readlines()]
+    try:
+        with open(file_path, 'r') as f:
+            paths_list = [line.rstrip() for line in f.readlines()]
+    except IOError:
+        print("paths.txt doesn't exist.")
 
     paths_list.pop(num)
 
@@ -59,8 +69,11 @@ def delete_path(num):
 def swap_order(num1, num2):
     file_path = PROJECT_DIR + '/paths.txt'
 
-    with open(file_path, 'r+') as f:
-        paths_list = [line.rstrip() for line in f.readlines()]
+    try:
+        with open(file_path, 'r') as f:
+            paths_list = [line.rstrip() for line in f.readlines()]
+    except IOError:
+        print("paths.txt doesn't exist.")
 
     paths_list[num1], paths_list[num2] = paths_list[num2], paths_list[num1] 
 
@@ -72,13 +85,30 @@ def swap_order(num1, num2):
 def reverse():
     file_path = PROJECT_DIR + '/paths.txt'
 
-    with open(file_path, 'r+') as f:
-        paths_list = [line.rstrip() for line in f.readlines()]
+    try:
+        with open(file_path, 'r') as f:
+            paths_list = [line.rstrip() for line in f.readlines()]
+    except IOError:
+        print("paths.txt doesn't exist.")
 
     with open(file_path, 'w') as f:
         for num, path in enumerate(reversed(paths_list)):
             f.write(path + '\n')
             print((num, path))
+
+
+def jump(num):
+    file_path = PROJECT_DIR + '/paths.txt'
+
+    try:
+        with open(file_path, 'r') as f:
+            paths_list = [line.rstrip() for line in f.readlines()]
+    except IOError:
+        print("paths.txt doesn't exist.")
+
+    cmd = paths_list[num]
+    os.chdir(cmd)
+    os.system(environ["SHELL"])
 
 
 def manipulation(args):
@@ -98,6 +128,9 @@ def manipulation(args):
 
     if args.list_reversed:
         reverse()
+
+    if args.jump:
+        jump(args.jump[0])
 
 
 if __name__ == '__main__':
