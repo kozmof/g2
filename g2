@@ -14,9 +14,9 @@ def register():
     #parser.add_argument("path", nargs='?', default=os.getcwd(), type=str)
     parser.add_argument('-l', '--list', help='list all saved paths', action='store_true')
     parser.add_argument('-lr', '--list-reversed', help='list all saved paths in reversed order', action='store_true')
-    parser.add_argument('-j', '--jump', help='jump to a specified path', nargs=1, action='store', metavar=('num'))
+    parser.add_argument('-j', '--jump', help='jump to a specified path', nargs=1, action='store', metavar=('num'), type=int)
     parser.add_argument('-s', '--save', help='save a current path', action='store_true')
-    parser.add_argument('-d', '--delete', help='delete a specified path', nargs=1, action='store', metavar=('num'))
+    parser.add_argument('-d', '--delete', help='delete a specified path', nargs=1, action='store', metavar=('num'), type=int)
     parser.add_argument('-c', '--change', help='change path order', nargs=2, action='store', metavar=('num', 'num'), type=int)
     args = parser.parse_args()
 
@@ -55,6 +55,18 @@ def swap_order(num1, num2):
         for path in paths_list:
             f.write(path + '\n')
 
+def reverse():
+    file_path = PROJECT_DIR + '/paths.txt'
+
+    with open(file_path, 'r+') as f:
+        paths_list = [line.rstrip() for line in f.readlines()]
+
+    with open(file_path, 'w') as f:
+        for num, path in enumerate(reversed(paths_list)):
+            f.write(path + '\n')
+            print((num, path))
+
+
 def manipulation(args):
     if args.list:
         paths_list = load_file()
@@ -66,6 +78,9 @@ def manipulation(args):
 
     if args.change:
         swap_order(args.change[0], args.change[1])
+
+    if args.list_reversed:
+        reverse()
 
 
 if __name__ == '__main__':
