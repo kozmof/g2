@@ -36,11 +36,24 @@ def write_file():
     file_path = PROJECT_DIR + '/paths.txt'
 
     with open(file_path, 'r+') as f:
-        paths = [line.rstrip() for line in f.readlines()]
+        paths_list = [line.rstrip() for line in f.readlines()]
 
-    if os.getcwd() not in paths:
+    if os.getcwd() not in paths_list:
         with open(file_path, 'a+') as f:
             f.write(os.getcwd() + '\n')
+
+
+def delete_path(num):
+    file_path = PROJECT_DIR + '/paths.txt'
+
+    with open(file_path, 'r+') as f:
+        paths_list = [line.rstrip() for line in f.readlines()]
+
+    paths_list.pop(num)
+
+    with open(file_path, 'w') as f:
+        for path in paths_list:
+            f.write(path + '\n')
 
 
 def swap_order(num1, num2):
@@ -54,6 +67,7 @@ def swap_order(num1, num2):
     with open(file_path, 'w') as f:
         for path in paths_list:
             f.write(path + '\n')
+
 
 def reverse():
     file_path = PROJECT_DIR + '/paths.txt'
@@ -75,6 +89,9 @@ def manipulation(args):
 
     if args.save:
         write_file()
+
+    if args.delete:
+        delete_path(args.delete[0])
 
     if args.change:
         swap_order(args.change[0], args.change[1])
