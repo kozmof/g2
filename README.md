@@ -17,15 +17,15 @@ g2 makes you jump to anywhere you registered.
 ```
 
 ## Options
-- -l --list
+- -l --list:
 	List all directories which you registered.
-- -lr --list-reversed
+- -lr --list-reversed:
 	Reverse a list and show it.
-- -s --save
+- -s --save:
 	Save a current directory.
-- -d --delete num 
+- -d --delete num:
 	Delete a directory with the number.
-- -c --change num num
+- -c --change num num:
 	Swap indexes which you spedified.
     
 ## Tips
