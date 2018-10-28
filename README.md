@@ -7,7 +7,7 @@ g2 makes you jump to anywhere you registered.
 **Currently Tested in:**
 - Python 3.5.2 x GNU bash, version 4.3.48(1)-release (x86_64-pc-linux-gnu)
 
-## Example
+## Examples
 ```
 ./g2 (Jump to a path numbered as 0)
 ./g2 -l (List all paths with numbers)
@@ -24,7 +24,7 @@ g2 makes you jump to anywhere you registered.
 - -s --save:
 	Save a current directory.
 - -d --delete num:
-	Delete a directory with the number.
+	Delete a saved path with the number.
 - -c --change num num:
 	Swap indexes which you spedified.
     

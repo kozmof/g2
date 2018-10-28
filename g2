@@ -3,10 +3,9 @@ import argparse
 import os
 from os import environ
 
-#Orders of saved paths are consistent with path.txt.
+#Orders of saved paths are consistent with paths.txt.
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-
 
 def register():
     parser = argparse.ArgumentParser("advanced cd manipulator")
