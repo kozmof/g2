@@ -25,10 +25,9 @@ def load_file():
     try:
         with open(file_path, 'r') as f:
             paths_list = [(num, line.rstrip()) for num, line in enumerate(f.readlines())]
+            return paths_list
     except IOError:
         print("paths.txt doesn't exist.")
-
-    return paths_list
 
 
 def write_file():
