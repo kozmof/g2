@@ -13,7 +13,7 @@ g2 makes you jump to anywhere you registered.
 ./g2 -l (List all paths with numbers)
 ./g2 3 (Jump to a path numbered as 3)
 ./g2 -c 1 5 (Swap paths numbered as 1 and 5)
-./g2 -s (Save a new directory)
+./g2 -s (Save a new path)
 ```
 
 ## Options
