@@ -106,7 +106,7 @@ def jump(num):
     os.system(environ["SHELL"])
 
 
-def manipulation(args):
+def manipulate(args):
     if args.list:
         paths_list = load_file()
         for path in paths_list:
@@ -130,5 +130,5 @@ def manipulation(args):
 
 if __name__ == '__main__':
     args = register()
-    manipulation(args)
+    manipulate(args)
 
