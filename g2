@@ -129,7 +129,7 @@ def manipulate(args):
         for path in load_path():
             print(path[0], path[1])
 
-    if args.save:
+    elif args.save:
         write_path()
 
     elif args.delete:
