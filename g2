@@ -16,7 +16,6 @@ def register():
     parser.add_argument('-d', '--delete', help='delete a specified path', nargs=1, action='store', metavar=('num'), type=int)
     parser.add_argument('-c', '--change', help='change path order', nargs=2, action='store', metavar=('num', 'num'), type=int)
     args = parser.parse_args()
-
     return args
 
 
