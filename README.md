@@ -1,4 +1,6 @@
-## g2
+g2
+===
+
 g2 makes you jump to directories which you registered.
 
 Tested in:
