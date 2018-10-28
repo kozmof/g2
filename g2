@@ -7,6 +7,7 @@ from os import environ
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 
+
 def register():
     parser = argparse.ArgumentParser("advanced cd manipulator")
     parser.add_argument("num", nargs='?', default=0, type=int)
@@ -28,6 +29,7 @@ def load_file():
             return paths_list
     except IOError:
         print("paths.txt doesn't exist.")
+        return 
 
 
 def write_file():
@@ -38,6 +40,7 @@ def write_file():
             paths_list = [line.rstrip() for line in f.readlines()]
     except IOError:
         print("paths.txt doesn't exist.")
+        return 
 
     if os.getcwd() not in paths_list:
         with open(file_path, 'a+') as f:
@@ -52,8 +55,13 @@ def delete_path(num):
             paths_list = [line.rstrip() for line in f.readlines()]
     except IOError:
         print("paths.txt doesn't exist.")
+        return 
 
-    paths_list.pop(num)
+    try:
+        paths_list.pop(num)
+    except IndexError:
+        print("This number doesn't exist.")
+        return 
 
     with open(file_path, 'w') as f:
         for path in paths_list:
@@ -68,8 +76,13 @@ def swap_order(num1, num2):
             paths_list = [line.rstrip() for line in f.readlines()]
     except IOError:
         print("paths.txt doesn't exist.")
+        return 
 
-    paths_list[num1], paths_list[num2] = paths_list[num2], paths_list[num1] 
+    try:
+        paths_list[num1], paths_list[num2] = paths_list[num2], paths_list[num1] 
+    except IndexError:
+        print("A first or second number doesn't exist.")
+        return 
 
     with open(file_path, 'w') as f:
         for path in paths_list:
@@ -84,6 +97,7 @@ def reverse():
             paths_list = [line.rstrip() for line in f.readlines()]
     except IOError:
         print("paths.txt doesn't exist.")
+        return 
 
     with open(file_path, 'w') as f:
         for num, path in enumerate(reversed(paths_list)):
@@ -99,10 +113,15 @@ def jump(num):
             paths_list = [line.rstrip() for line in f.readlines()]
     except IOError:
         print("paths.txt doesn't exist.")
+        return 
 
-    cmd = paths_list[num]
-    os.chdir(cmd)
-    os.system(environ["SHELL"])
+    try:
+        cmd = paths_list[num]
+        os.chdir(cmd)
+        os.system(environ["SHELL"])
+    except IndexError:
+        print("This number doesn't exist.")
+        return
 
 
 def manipulate(args):
