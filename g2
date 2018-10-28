@@ -115,16 +115,16 @@ def manipulation(args):
     if args.save:
         write_file()
 
-    if args.delete:
+    elif args.delete:
         delete_path(args.delete[0])
 
-    if args.change:
+    elif args.change:
         swap_order(args.change[0], args.change[1])
 
-    if args.list_reversed:
+    elif args.list_reversed:
         reverse()
 
-    if not (args.list or args.save or args.delete or args.change or args.list_reversed):
+    else:
         jump(args.num)
 
 
