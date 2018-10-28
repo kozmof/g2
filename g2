@@ -20,7 +20,7 @@ def register():
     return args
 
 
-def load_file():
+def load_path():
     file_path = PROJECT_DIR + '/paths.txt'
 
     try:
@@ -32,7 +32,7 @@ def load_file():
         return 
 
 
-def write_file():
+def write_path():
     file_path = PROJECT_DIR + '/paths.txt'
 
     try:
@@ -126,12 +126,11 @@ def jump(num):
 
 def manipulate(args):
     if args.list:
-        paths_list = load_file()
-        for path in paths_list:
+        for path in load_path():
             print(path[0], path[1])
 
     if args.save:
-        write_file()
+        write_path()
 
     elif args.delete:
         delete_path(args.delete[0])
