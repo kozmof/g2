@@ -1,10 +1,10 @@
 g2
 ===
-![alt image](https://img.shields.io/badge/python-3.6-blue.svg)
+![alt image](https://img.shields.io/badge/version-1.0.0-blue.svg) ![alt image](https://img.shields.io/badge/Python-3.5-blue.svg)
 
 g2 makes you jump to anywhere you registered.
 
-**Curently Tested in:**
+**Currently Tested in:**
 - Python 3.5.2 x GNU bash, version 4.3.48(1)-release (x86_64-pc-linux-gnu)
 
 ## Example
