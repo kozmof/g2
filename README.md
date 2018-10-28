@@ -26,7 +26,7 @@ g2 makes you jump to anywhere you registered.
 - -d --delete num:
 	Delete a saved path with the number.
 - -c --change num num:
-	Swap indexes which you spedified.
+	Swap indexes which you specified.
     
 ## Tips
 You can use g2 anywhere by aliasing in .bashrc 
