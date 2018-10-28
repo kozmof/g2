@@ -116,8 +116,8 @@ def jump(num):
         return 
 
     try:
-        cmd = paths_list[num]
-        os.chdir(cmd)
+        path = paths_list[num]
+        os.chdir(path)
         os.system(environ["SHELL"])
     except IndexError:
         print("This number doesn't exist.")
