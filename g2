@@ -47,6 +47,20 @@ def write_path():
             f.write(os.getcwd() + '\n')
 
 
+def write_path_to_top():
+    try:
+        with open(file_path, 'r') as f:
+            paths_list = [line.rstrip() for line in f.readlines()]
+    except IOError:
+        print("paths.txt doesn't exist.")
+        return 
+
+    if os.getcwd() not in paths_list:
+        with open(file_path, 'w+') as f:
+            for path in [os.getcwd()] + paths_list:
+                f.write(path + '\n')
+
+
 def delete_path(num):
     file_path = PROJECT_DIR + '/paths.txt'
 
