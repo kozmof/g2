@@ -24,6 +24,10 @@ g2 makes you jump to anywhere you registered in CL.
 	Reverse a list and show it.
 - -s --save:
 	Save a current directory.
+
+- -s --save-at-top:
+    Save a current directory at the top(i.e. 0).
+
 - -d --delete num:
 	Delete a saved path with the number.
 - -c --change num num:
