@@ -14,7 +14,6 @@ class TestG2(unittest.TestCase):
 
         path_list =  g2_lib.load_path("test.txt")
         self.assertEqual(path_list, expected_path_list)
-        
 
     def test_write_path(self):
         with open("test.txt", "w") as f:
@@ -26,7 +25,6 @@ class TestG2(unittest.TestCase):
             line = f.read()
             self.assertEqual(line, os.getcwd() + "\n")
 
-
     def test_write_path_to_top(self):
         with open("test.txt", "w") as f:
             f.write("test\n")
@@ -37,7 +35,6 @@ class TestG2(unittest.TestCase):
             line = f.readlines()
             self.assertEqual(line[0], os.getcwd() + "\n")
             self.assertEqual(line[1], "test\n")
-
 
     def test_delete_path(self):
         with open("test.txt", "w") as f:
