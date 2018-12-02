@@ -28,9 +28,9 @@ g2 makes you jump to anywhere you registered in CL.
 - -st --save-at-top:
     Save a current directory at the top(i.e. 0).
 
-- -d --delete num:
+- -d --delete [num]:
 	Delete a saved path with the number.
-- -c --change num num:
+- -c --change [num 1] [num 2]:
 	Swap indexes which you specified.
     
 ### Tips
