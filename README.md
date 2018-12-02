@@ -25,7 +25,7 @@ g2 makes you jump to anywhere you registered in CL.
 - -s --save:
 	Save a current directory.
 
-- -s --save-at-top:
+- -st --save-at-top:
     Save a current directory at the top(i.e. 0).
 
 - -d --delete num:
