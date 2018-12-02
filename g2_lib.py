@@ -13,6 +13,7 @@ def register():
     parser.add_argument('-l', '--list', help='list all saved paths', action='store_true')
     parser.add_argument('-lr', '--list-reversed', help='reverse a list then shows them', action='store_true')
     parser.add_argument('-s', '--save', help='save a current path', action='store_true')
+    parser.add_argument('-st', '--save-at-top', help='save a current path at the top', action='store_true')
     parser.add_argument('-d', '--delete', help='delete a specified path', nargs=1, action='store', metavar=('num'), type=int)
     parser.add_argument('-c', '--change', help='change path order', nargs=2, action='store', metavar=('num', 'num'), type=int)
     args = parser.parse_args()
@@ -66,6 +67,7 @@ def delete_path(num, file_path):
 
     try:
         paths_list.pop(num)
+
     except IndexError:
         print("This number doesn't exist.")
         return 
@@ -73,6 +75,7 @@ def delete_path(num, file_path):
     with open(file_path, 'w') as f:
         for path in paths_list:
             f.write(path + '\n')
+            print(path)
 
 
 def swap_order(num1, num2, file_path):
@@ -134,6 +137,9 @@ def manipulate(args):
 
     elif args.save:
         write_path(file_path)
+
+    elif args.save_at_top:
+        write_path_to_top(file_path)
 
     elif args.delete:
         delete_path(args.delete[0], file_path)
