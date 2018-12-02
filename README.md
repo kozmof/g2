@@ -1,7 +1,7 @@
 g2
 -- 
 
-![alt image](https://img.shields.io/badge/version-1.0.1-blue.svg) ![alt image](https://img.shields.io/badge/Python-3.5-blue.svg)
+![alt image](https://img.shields.io/badge/version-1.1.0-blue.svg) ![alt image](https://img.shields.io/badge/Python-3.5-blue.svg)
 
 g2 makes you jump to anywhere you registered in CL.
 
