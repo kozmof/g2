@@ -69,12 +69,13 @@ class TestG2(unittest.TestCase):
             lines = f.read()
             self.assertEqual(lines, "1\n0\n")
 
-   # def test_jump(self):
-   #     with open("test.txt", "w") as f:
-   #         f.write("/" + "\n")
+    @unittest.skip("This test moves a current directry")
+    def test_jump(self):
+        with open("test.txt", "w") as f:
+            f.write("/" + "\n")
 
-   #     g2_lib.jump(0, "test.txt")
-   #     self.assertEqual(os.getcwd(), "/")
+        g2_lib.jump(0, "test.txt")
+        self.assertEqual(os.getcwd(), "/")
 
 if __name__ == "__main__":
     unittest.main()
