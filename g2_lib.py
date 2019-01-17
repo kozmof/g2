@@ -47,7 +47,7 @@ def write_path(file_path):
 
 #TODO test
 def write_path_with_pos(register_path, file_path):
-    if not os.path.exists(register_path):
+    if not os.path.isdir(register_path):
         print("{} doesn't exist.".format(register_path))
         return 
 
@@ -64,7 +64,7 @@ def write_path_with_pos(register_path, file_path):
 
 #TODO test
 def write_path_with_pos_to_top(register_path, file_path):
-    if not os.path.exists(register_path):
+    if not os.path.isdir(register_path):
         print("{} doesn't exist.".format(register_path))
         return 
 
@@ -112,10 +112,10 @@ def delete_path(num, file_path):
 
     with open(file_path, 'w') as f:
         for path in paths_list:
-            sign = ""
-
-            if os.path.exists(path):
+            if os.path.isdir(path):
                 sign = "🗸"
+            else:
+                sign = "💀"
 
             f.write(path + '\n')
             print(path + " {}".format(sign))
@@ -141,10 +141,10 @@ def ragne_delete(num1, num2, file_path):
 
     with open(file_path, 'w') as f:
         for path in paths_list:
-            sign = ""
-
-            if os.path.exists(path):
+            if os.path.isdir(path):
                 sign = "🗸"
+            else:
+                sign = "💀"
 
             f.write(path + '\n')
             print(path + " {}".format(sign))
@@ -166,10 +166,10 @@ def swap_order(num1, num2, file_path):
 
     with open(file_path, 'w') as f:
         for path in paths_list:
-            sign = ""
-
-            if os.path.exists(path):
+            if os.path.isdir(path):
                 sign = "🗸"
+            else:
+                sign = "💀"
 
             f.write(path + '\n')
             print(path + " {}".format(sign))
@@ -185,10 +185,10 @@ def reverse(file_path):
 
     with open(file_path, 'w') as f:
         for num, path in enumerate(reversed(paths_list)):
-            sign = ""
-
-            if os.path.exists(path):
+            if os.path.isdir(path):
                 sign = "🗸"
+            else:
+                sign = "💀"
 
             f.write(path + '\n')
             print(num, path + " {}".format(sign))
@@ -205,7 +205,7 @@ def jump(num, file_path):
     try:
         path = paths_list[num]
 
-        if os.path.exists(path):
+        if os.path.isdir(path):
             os.chdir(path)
             os.system(environ["SHELL"])
         else:
@@ -222,10 +222,10 @@ def manipulate(args):
 
     if args.list:
         for path in load_path(file_path):
-            sign = ""
-
-            if os.path.exists(path[1]):
+            if os.path.isdir(path[1]):
                 sign = "🗸"
+            else:
+                sign = "💀"
 
             print(path[0], path[1] + " {}".format(sign))
 
