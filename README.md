@@ -24,7 +24,7 @@ g2 makes you move to anywhere you registered in CLI.
 	List all directories which you registered. If the path exists, it shows ✔️ else it shows 💀. 
 - -lr --list-reversed:
 	Reverse a list and show it.
-- -s --save
+- -s --save:
 	Save a current directory.
 - -sp --save-path:
 	Save a specified directory.
