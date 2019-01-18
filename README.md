@@ -15,7 +15,7 @@ g2 makes you move to anywhere you registered in CLI.
 ./g2 3 (Jump to a directory numbered as 3)
 ./g2 -c 1 5 (Swap saved directories numbered as 1 and 5 in a list)
 ./g2 -s (Save a current directory)
-./g2 -dr 0 2 (delete directories from 0 to 2)
+./g2 -dr 0 2 (Unregister directories from 0 to 2)
 ./g2 -spt ~/foo (save a directory to the top)
 ```
 
@@ -33,9 +33,9 @@ g2 makes you move to anywhere you registered in CLI.
 - -spt --save-path-at-top:
 	Save a specified directory at the top.
 - -d --delete [num]:
-	Delete a saved directory with the number.
+	Unregister a saved directory with the number.
 - -dr --delete-range [num1] [num2]:
-	Delete saved directories from num1 to num2.
+	Unregister saved directories from num1 to num2.
 - -c --change [num1] [num2]:
 	Swap indexes which you specified.
     
