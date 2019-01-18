@@ -116,7 +116,7 @@ def delete_path(num, file_path):
     with open(file_path, 'w') as f:
         for num, path in enumerate(paths_list):
             if os.path.isdir(path):
-                sign = "🗸"
+                sign = "✔️"
             else:
                 sign = "💀"
 
@@ -145,7 +145,7 @@ def range_delete(num1, num2, file_path):
     with open(file_path, 'w') as f:
         for num, path in enumerate(paths_list):
             if os.path.isdir(path):
-                sign = "🗸"
+                sign = "✔️"
             else:
                 sign = "💀"
 
@@ -170,7 +170,7 @@ def swap_order(num1, num2, file_path):
     with open(file_path, 'w') as f:
         for num, path in enumerate(paths_list):
             if os.path.isdir(path):
-                sign = "🗸"
+                sign = "✔️"
             else:
                 sign = "💀"
 
@@ -189,7 +189,7 @@ def reverse(file_path):
     with open(file_path, 'w') as f:
         for num, path in enumerate(reversed(paths_list)):
             if os.path.isdir(path):
-                sign = "🗸"
+                sign = "✔️"
             else:
                 sign = "💀"
 
@@ -226,7 +226,7 @@ def manipulate(args):
     if args.list:
         for path in load_path(file_path):
             if os.path.isdir(path[1]):
-                sign = "🗸"
+                sign = "✔️"
             else:
                 sign = "💀"
 
