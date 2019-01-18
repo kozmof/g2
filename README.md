@@ -44,3 +44,6 @@ You can use g2 anywhere by aliasing in .bashrc
 ```
 alias g2='python3 path/to/g2'
 ```
+### License
+MIT
+
