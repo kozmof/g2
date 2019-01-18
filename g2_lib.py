@@ -212,7 +212,7 @@ def jump(num, file_path):
             os.chdir(path)
             os.system(environ["SHELL"])
         else:
-            print("{} doesn't exists".format(path))
+            print("{} doesn't exist".format(path))
             return 
 
     except IndexError:
