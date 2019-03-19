@@ -26,11 +26,11 @@ g2 makes you move to anywhere you registered in CLI.
 	Reverse a list and show it.
 - -s --save:
 	Save a current directory.
-- -sp --save-path:
+- -sp --save-path [path]:
 	Save a specified directory.
 - -st --save-at-top:
     Save a current directory at the top(i.e. 0).
-- -spt --save-path-at-top:
+- -spt --save-path-at-top [path]:
 	Save a specified directory at the top.
 - -d --delete [num]:
 	Unregister a saved directory with the number.
