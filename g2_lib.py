@@ -1,5 +1,4 @@
 import os
-import re
 import argparse
 from os import environ
 from pathlib import Path
@@ -236,7 +235,7 @@ def match(name, file_path):
 
             split_list = path.split("/")
 
-            if split_list and re.search(name, split_list[-1]):
+            if split_list and name in split_list[-1]:
                 if os.path.isdir(path):
                     os.chdir(path)
                     os.system(environ["SHELL"])
