@@ -1,4 +1,5 @@
 import os
+import re
 import argparse
 from os import environ
 from pathlib import Path
@@ -10,7 +11,8 @@ PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def register():
     parser = argparse.ArgumentParser("advanced cd manipulator")
-    parser.add_argument("num", nargs='?', default=0, type=int)
+    parser.add_argument('num', nargs='?', default=0, type=int)
+    parser.add_argument('-m', '--match', nargs=1, action='store', default="", type=str)
     parser.add_argument('-l', '--list', help='list all saved paths', action='store_true')
     parser.add_argument('-lr', '--list-reversed', help='reverse a list then shows them', action='store_true')
     parser.add_argument('-s', '--save', help='save a current path', action='store_true')
@@ -219,6 +221,33 @@ def jump(num, file_path):
         print("This number doesn't exist.")
         return
 
+def match(name, file_path):
+    try:
+        with open(file_path, 'r') as f:
+            paths_list = [line.rstrip() for line in f.readlines()]
+    except IOError:
+        print("paths.txt doesn't exist.")
+        return 
+
+    try:
+        for path in paths_list:
+            if path[-1] == "/":
+                path = path[:-1]
+
+            split_list = path.split("/")
+
+            if split_list and re.search(name, split_list[-1]):
+                if os.path.isdir(path):
+                    os.chdir(path)
+                    os.system(environ["SHELL"])
+                    return 
+                else:
+                    print("{} doesn't exist".format(path))
+                    return 
+
+    except IndexError:
+        print("This number doesn't exist.")
+        return
 
 def manipulate(args):
     file_path = PROJECT_DIR + '/paths.txt'
@@ -255,6 +284,9 @@ def manipulate(args):
 
     elif args.list_reversed:
         reverse(file_path)
+
+    elif args.match:
+        match(args.match[0], file_path)
 
     else:
         jump(args.num, file_path)
