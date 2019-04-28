@@ -1,7 +1,7 @@
 g2
 -- 
 
-![alt image](https://img.shields.io/badge/version-2.0.0-blue.svg) ![alt image](https://img.shields.io/badge/Python-3-blue.svg)
+![alt image](https://img.shields.io/badge/version-2.1.0-blue.svg) ![alt image](https://img.shields.io/badge/Python-3-blue.svg)
 
 g2 makes you move to anywhere you registered in CLI.
 
