@@ -17,7 +17,7 @@ g2 makes you move to anywhere you registered in CLI.
 ./g2 -s (Save a current directory)
 ./g2 -dr 0 2 (Unregister directories from 0 to 2)
 ./g2 -spt ~/foo (save a directory to the top)
-./g2 -m test (Jump to a first matched directory if you registered it ex. /foo/bar/test)
+./g2 -m test (Jump to a first matched bottom of directory if you registered it ex. /foo/bar/test)
 ./g2 -ma test (Jump to a first matched path if you registered it ex. /foo/test/bar)
 ```
 
