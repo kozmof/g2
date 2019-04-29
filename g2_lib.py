@@ -12,6 +12,7 @@ def register():
     parser = argparse.ArgumentParser("advanced cd manipulator")
     parser.add_argument('num', nargs='?', default=0, type=int)
     parser.add_argument('-m', '--match', nargs=1, action='store', default="", type=str)
+    parser.add_argument('-ma', '--match-all', nargs=1, action='store', default="", type=str)
     parser.add_argument('-l', '--list', help='list all saved paths', action='store_true')
     parser.add_argument('-lr', '--list-reversed', help='reverse a list then shows them', action='store_true')
     parser.add_argument('-s', '--save', help='save a current path', action='store_true')
@@ -169,8 +170,9 @@ def jump(num, file_path):
         print("This number doesn't exist.")
         return
 
-def match(name, file_path):
+def match(name, file_path, full_path=False):
     paths_list = load_path(file_path)
+    flag = False
 
     try:
         for path in paths_list:
@@ -179,7 +181,16 @@ def match(name, file_path):
 
             split_list = path.split("/")
 
-            if split_list and name in split_list[-1]:
+            if full_path:
+                for directory in split_list:
+                    if name in directory:
+                        flag = True
+                        break
+            else:
+                if split_list and name in split_list[-1]:
+                    flag = True
+
+            if flag:
                 if os.path.isdir(path):
                     os.chdir(path)
                     os.system(environ["SHELL"])
@@ -227,6 +238,9 @@ def manipulate(args):
 
     elif args.match:
         match(args.match[0], file_path)
+
+    elif args.match_all:
+        match(args.match_all[0], file_path, full_path=True)
 
     else:
         jump(args.num, file_path)
