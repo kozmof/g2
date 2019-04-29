@@ -15,7 +15,7 @@ class TestG2(unittest.TestCase):
             f.write("1\n")
             f.write("2\n")
 
-        path_list =  g2_lib.load_path("test.txt")
+        path_list =  g2_lib.load_path("test.txt", with_num=True)
         self.assertEqual(path_list, expected_path_list)
 
     def test_write_path(self):
@@ -112,7 +112,7 @@ class TestG2(unittest.TestCase):
             lines = f.read()
             self.assertEqual(lines, "1\n0\n")
 
-    @unittest.skip("This test moves a current directry")
+    #@unittest.skip("This test moves a current directry")
     def test_jump(self):
         with open("test.txt", "w") as f:
             f.write("/" + "\n")

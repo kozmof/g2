@@ -3,7 +3,7 @@ import argparse
 from os import environ
 from pathlib import Path
 
-#Orders of saved paths are consistent with paths.txt.
+# Orders of saved paths are consistent with paths.txt.
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -25,23 +25,45 @@ def register():
     return args
 
 
-def load_path(file_path):
+def load_path(file_path, with_num=False):
     try:
         with open(file_path, 'r') as f:
-            paths_list = [(num, line.rstrip()) for num, line in enumerate(f.readlines())]
+            if with_num:
+                paths_list = [(num, line.rstrip()) for num, line in enumerate(f.readlines())]
+            else:
+                paths_list = [line.rstrip() for line in f.readlines()]
+
             return paths_list
+
     except IOError:
         print("paths.txt doesn't exist.")
         return 
+
+
+def make_sign(path):
+    if os.path.isdir(path):
+        sign = "✔️"
+    else:
+        sign = "💀"
+
+    return sign
+
+
+def save(file_path, paths_list, reverse=False):
+    with open(file_path, 'w') as f:
+        if not reverse:
+            enum = enumerate(paths_list)
+        else:
+            enum = enumerate(reversed(paths_list))
+
+        for num, path in enum:
+            sign = make_sign(path)
+            f.write(path + '\n')
+            print(num, path + " {}".format(sign))
 
 
 def write_path(file_path):
-    try:
-        with open(file_path, 'r') as f:
-            paths_list = [line.rstrip() for line in f.readlines()]
-    except IOError:
-        print("paths.txt doesn't exist.")
-        return 
+    paths_list = load_path(file_path)
 
     if os.getcwd() not in paths_list:
         with open(file_path, 'a+') as f:
@@ -54,12 +76,7 @@ def write_path_with_pos(register_path, file_path):
         print("{} doesn't exist.".format(register_path))
         return 
 
-    try:
-        with open(file_path, 'r') as f:
-            paths_list = [line.rstrip() for line in f.readlines()]
-    except IOError:
-        print("paths.txt doesn't exist.")
-        return 
+    paths_list = load_path(file_path)
 
     if register_path not in paths_list:
         with open(file_path, 'a+') as f:
@@ -67,12 +84,7 @@ def write_path_with_pos(register_path, file_path):
 
 
 def write_path_to_top(file_path):
-    try:
-        with open(file_path, 'r') as f:
-            paths_list = [line.rstrip() for line in f.readlines()]
-    except IOError:
-        print("paths.txt doesn't exist.")
-        return 
+    paths_list = load_path(file_path)
 
     if os.getcwd() not in paths_list:
         with open(file_path, 'w+') as f:
@@ -86,12 +98,7 @@ def write_path_with_pos_to_top(register_path, file_path):
         print("{} doesn't exist.".format(register_path))
         return 
 
-    try:
-        with open(file_path, 'r') as f:
-            paths_list = [line.rstrip() for line in f.readlines()]
-    except IOError:
-        print("paths.txt doesn't exist.")
-        return 
+    paths_list = load_path(file_path)
 
     if register_path not in paths_list:
         with open(file_path, 'w+') as f:
@@ -100,12 +107,7 @@ def write_path_with_pos_to_top(register_path, file_path):
 
 
 def delete_path(num, file_path):
-    try:
-        with open(file_path, 'r') as f:
-            paths_list = [line.rstrip() for line in f.readlines()]
-    except IOError:
-        print("paths.txt doesn't exist.")
-        return 
+    paths_list = load_path(file_path)
 
     try:
         paths_list.pop(num)
@@ -114,24 +116,11 @@ def delete_path(num, file_path):
         print("This number doesn't exist.")
         return 
 
-    with open(file_path, 'w') as f:
-        for num, path in enumerate(paths_list):
-            if os.path.isdir(path):
-                sign = "✔️"
-            else:
-                sign = "💀"
-
-            f.write(path + '\n')
-            print(num, path + " {}".format(sign))
+    save(file_path, paths_list)
             
 
 def range_delete(num1, num2, file_path):
-    try:
-        with open(file_path, 'r') as f:
-            paths_list = [line.rstrip() for line in f.readlines()]
-    except IOError:
-        print("paths.txt doesn't exist.")
-        return 
+    paths_list = load_path(file_path)
 
     if 0 <= num1 <= len(paths_list) and 0 <= num2 <= len(paths_list):
         if num1 < num2:
@@ -143,24 +132,11 @@ def range_delete(num1, num2, file_path):
     else:
         print("This number doesn't exist.")
 
-    with open(file_path, 'w') as f:
-        for num, path in enumerate(paths_list):
-            if os.path.isdir(path):
-                sign = "✔️"
-            else:
-                sign = "💀"
-
-            f.write(path + '\n')
-            print(num, path + " {}".format(sign))
+    save(file_path, paths_list)
 
 
 def swap_order(num1, num2, file_path):
-    try:
-        with open(file_path, 'r') as f:
-            paths_list = [line.rstrip() for line in f.readlines()]
-    except IOError:
-        print("paths.txt doesn't exist.")
-        return 
+    paths_list = load_path(file_path)
 
     try:
         paths_list[num1], paths_list[num2] = paths_list[num2], paths_list[num1] 
@@ -168,43 +144,16 @@ def swap_order(num1, num2, file_path):
         print("A first or second number doesn't exist.")
         return 
 
-    with open(file_path, 'w') as f:
-        for num, path in enumerate(paths_list):
-            if os.path.isdir(path):
-                sign = "✔️"
-            else:
-                sign = "💀"
-
-            f.write(path + '\n')
-            print(num, path + " {}".format(sign))
+    save(file_path, paths_list)
 
 
 def reverse(file_path):
-    try:
-        with open(file_path, 'r') as f:
-            paths_list = [line.rstrip() for line in f.readlines()]
-    except IOError:
-        print("paths.txt doesn't exist.")
-        return 
-
-    with open(file_path, 'w') as f:
-        for num, path in enumerate(reversed(paths_list)):
-            if os.path.isdir(path):
-                sign = "✔️"
-            else:
-                sign = "💀"
-
-            f.write(path + '\n')
-            print(num, path + " {}".format(sign))
+    paths_list = load_path(file_path)
+    save(file_path, paths_list, reverse=True)
 
 
 def jump(num, file_path):
-    try:
-        with open(file_path, 'r') as f:
-            paths_list = [line.rstrip() for line in f.readlines()]
-    except IOError:
-        print("paths.txt doesn't exist.")
-        return 
+    paths_list = load_path(file_path)
 
     try:
         path = paths_list[num]
@@ -221,12 +170,7 @@ def jump(num, file_path):
         return
 
 def match(name, file_path):
-    try:
-        with open(file_path, 'r') as f:
-            paths_list = [line.rstrip() for line in f.readlines()]
-    except IOError:
-        print("paths.txt doesn't exist.")
-        return 
+    paths_list = load_path(file_path)
 
     try:
         for path in paths_list:
@@ -248,17 +192,14 @@ def match(name, file_path):
         print("This number doesn't exist.")
         return
 
+
 def manipulate(args):
     file_path = PROJECT_DIR + '/paths.txt'
 
     if args.list:
-        for path in load_path(file_path):
-            if os.path.isdir(path[1]):
-                sign = "✔️"
-            else:
-                sign = "💀"
-
-            print(path[0], path[1] + " {}".format(sign))
+        for num, path in load_path(file_path, with_num=True):
+            sign = make_sign(path)
+            print(num, path + " {}".format(sign))
 
     elif args.save:
         write_path(file_path)
